@@ -20,23 +20,26 @@ chaine='Nom'
 #Boucle pour connaitre les arguments
 for j in $@
 do
-	case ${j} in
-		-d?)
-			sep=${j:2:1};
-		;;
-		-s*)
-			col=${j:2};
-		;;
-		-S*)
-		    chaine=${j:2};
-		    col=$(head -n 1 | tr ";" "\n" | grep $chaine -n | cut -d: -f1);
-		;;
-	esac
+    case ${j} in
+	#Change le séparateur
+	-d?)
+	    sep=${j:2:1};
+	    ;;
+	#Trie par rapport à un numéro de colonne
+	-s*)
+	    col=${j:2};
+	    ;;
+	#Trie par rapport à un nom de colonne
+	-S*)
+	    chaine=${j:2};
+	    col=$(head -n 1 | tr ";" "\n" | grep $chaine -n | cut -d: -f1);
+	    ;;
+    esac
 done
 
 echo "<table>"
 
-#Tant que l'on peux lire une ligne dans le fichier passé en paramétre
+#Tant que l'on peux lire une ligne dans le fichier passé sur l'entrée standard
 (head -n 1 && tail -n +3 | sort -t$sep -k$col) | while read ligne
 do
     if ((i==0))
