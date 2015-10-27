@@ -10,11 +10,9 @@ echo '</head>'
 
 #Compteur pour savoir si c'est la 1ére fois que l'on rentre dans la boucle
 i=0
-#Pour définir le comparateur
+
 sep=';'
-#Indique le numéro de la colonne a trier
 col=1
-#Trie la colonne qui posséde ce nom
 chaine='Nom'
 
 #Boucle pour connaitre les arguments
@@ -29,7 +27,7 @@ do
 	-s*)
 	    col=${j:2};
 	    ;;
-	#Trie par rapport à un nom de colonne
+	#Trie par rapport à un nom de colonne (ps: ça marche pas)
 	-S*)
 	    chaine=${j:2};
 	    col=$(head -n 1 | tr ";" "\n" | grep $chaine -n | cut -d: -f1);
