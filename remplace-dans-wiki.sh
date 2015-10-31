@@ -5,12 +5,12 @@ read corps;
 
 resultat=$(cat $1 | sed -n '1h;1!H;${;g;s/--DEBUT_REMPLACEMENT'.*'--FIN_REMPLACEMENT--/'"$corps"'/g;p;}');
 
-while (echo -e $resultat | grep "\*" >2)
+while (echo -e $resultat | grep "\*" > /dev/null)
 do
     resultat=$(echo -e $resultat | sed '${s/'"\*"'/'"<strong>"'/;s/'"\*"'/'"<\/strong>"'/;}');
 done
 
-while (echo -e $resultat | grep "\"" >2)
+while (echo -e $resultat | grep "\"" > /dev/null)
 do
     resultat=$(echo -e $resultat | sed '${s/'"\""'/'"<em>"'/;s/'"\""'/'"<\/em>"'/;}');
 done
